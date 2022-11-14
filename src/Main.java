@@ -5,5 +5,7 @@ public class Main {
         LecturaJSON fileJSON = new LecturaJSON();
         fileJSON.readFile();
         fileJSON.imprimir();
+        vistaPrincipal vista = new vistaPrincipal();
+        vista.setVisible(true);
     }
 }
