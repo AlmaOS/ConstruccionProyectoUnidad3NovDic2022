@@ -15,9 +15,11 @@ public class LecturaJSON {
     private JSONObject objetosDeJSON;
     private int numEmployee;
 
-    public  void readFile(){
+
+    public  void readFile(String archivo){
         JSONParser jsonParser = new JSONParser();
-        try (FileReader readFile = new FileReader("employee.txt")){
+        try{
+            FileReader readFile = new FileReader(archivo);
             Object objJSON = jsonParser.parse(readFile);
 
             JSONObject auxObjetosDeJSON = new JSONObject((Map) objJSON);
@@ -28,16 +30,17 @@ public class LecturaJSON {
             employeeInfo = new String[numEmployee][4];
             String[][] auxInfoEmployee = new String[numEmployee][4];
             employeeInfo = guardarInfoJSON(auxInfoEmployee);
-        } catch (FileNotFoundException e) {
+
+        } catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
-        } catch (IOException e) {
+        } catch (IOException e){
             System.out.println("Error detectado: "+ e.getMessage());
-        } catch (ParseException e) {
+        } catch (ParseException e){
             System.out.println("Estructura del JSON incorrecta");
         }
     }
 
-    public int numEmployeeCount(){
+    private int numEmployeeCount(){
         int numberEmployees = 0;
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
         for (Object a: listEmployee) {
@@ -46,7 +49,7 @@ public class LecturaJSON {
         return numberEmployees;
     }
 
-    public String[][] guardarInfoJSON(String[][] registroDatos){
+    private String[][] guardarInfoJSON(String[][] registroDatos){
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
         for (Object a: listEmployee) {
             JSONObject auxEmployee = (JSONObject) a;
@@ -60,9 +63,11 @@ public class LecturaJSON {
     }
 
     public void imprimir(){
-        for(String[] a: employeeInfo){
-            for (String b: a){
-                System.out.println(b);
+        if(numEmployee!=0){
+            for(String[] a: employeeInfo){
+                for (String b: a){
+                    System.out.println(b);
+                }
             }
         }
     }
@@ -70,4 +75,6 @@ public class LecturaJSON {
     public String[][] getEmployeeInfo() {
         return employeeInfo;
     }
+
+    public int getNumEmployee(){return numEmployee;}
 }
