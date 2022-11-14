@@ -30,11 +30,12 @@ public class LecturaJSON {
             employeeInfo = new String[numEmployee][4];
             String[][] auxInfoEmployee = new String[numEmployee][4];
             employeeInfo = guardarInfoJSON(auxInfoEmployee);
-        } catch (FileNotFoundException e) {
+
+        } catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
-        } catch (IOException e) {
+        } catch (IOException e){
             System.out.println("Error detectado: "+ e.getMessage());
-        } catch (ParseException e) {
+        } catch (ParseException e){
             System.out.println("Estructura del JSON incorrecta");
         }
     }
@@ -62,9 +63,11 @@ public class LecturaJSON {
     }
 
     public void imprimir(){
-        for(String[] a: employeeInfo){
-            for (String b: a){
-                System.out.println(b);
+        if(numEmployee!=0){
+            for(String[] a: employeeInfo){
+                for (String b: a){
+                    System.out.println(b);
+                }
             }
         }
     }

@@ -2,12 +2,11 @@ package Pruebas;
 
 import Modelo.LecturaJSON;
 import Vista.vistaPrincipal;
+import com.sun.tools.jconsole.JConsoleContext;
+import com.sun.tools.jconsole.JConsolePlugin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -27,8 +26,8 @@ public class Entrega1_Test {
 
     @BeforeEach
     public void inicialize(){
-        System.out.println("Instanciando contact manager...");
-        LecturaJSON jsonReader = new LecturaJSON();
+        System.out.println("Instanciando lector Json...");
+        jsonReader = new LecturaJSON();
     }
 
     @Test
@@ -41,17 +40,17 @@ public class Entrega1_Test {
 
     @Test
     @DisplayName("El archivo a leer debe estar dentro del directorio")
-    public void shouldThrowFileNotFoundExceptionWhenFilenameWrong() {
-        assertThrows(FileNotFoundException.class, () -> {
-            jsonReader.readFile("empleado.txt");
-        });
+    public void shouldThrowStopWhenFilenameWrong() {
+        jsonReader.readFile("empleado.txt");
+        assertEquals(0,jsonReader.getNumEmployee());
+        assertNull(jsonReader.getEmployeeInfo());
     }
 
     @Test
     @DisplayName("El archivo a leer debe tener la estructura adecuada")
-    public void shouldThrowParseExceptionWhenJsonStructureWrong() {
-        assertThrows(ParseException.class, () -> {
-            jsonReader.readFile("employ.txt");
-        });
+    public void shouldStopWhenJsonStructureWrong() {
+        jsonReader.readFile("employ.txt");
+        assertEquals(0,jsonReader.getNumEmployee());
+        assertNull(jsonReader.getEmployeeInfo());
     }
 }
