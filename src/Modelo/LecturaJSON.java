@@ -15,9 +15,11 @@ public class LecturaJSON {
     private JSONObject objetosDeJSON;
     private int numEmployee;
 
-    public  void readFile(){
+
+    public  void readFile(String archivo){
         JSONParser jsonParser = new JSONParser();
-        try (FileReader readFile = new FileReader("employee.txt")){
+        try{
+            FileReader readFile = new FileReader(archivo);
             Object objJSON = jsonParser.parse(readFile);
 
             JSONObject auxObjetosDeJSON = new JSONObject((Map) objJSON);
@@ -37,7 +39,7 @@ public class LecturaJSON {
         }
     }
 
-    public int numEmployeeCount(){
+    private int numEmployeeCount(){
         int numberEmployees = 0;
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
         for (Object a: listEmployee) {
@@ -46,7 +48,7 @@ public class LecturaJSON {
         return numberEmployees;
     }
 
-    public String[][] guardarInfoJSON(String[][] registroDatos){
+    private String[][] guardarInfoJSON(String[][] registroDatos){
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
         for (Object a: listEmployee) {
             JSONObject auxEmployee = (JSONObject) a;
@@ -70,4 +72,6 @@ public class LecturaJSON {
     public String[][] getEmployeeInfo() {
         return employeeInfo;
     }
+
+    public int getNumEmployee(){return numEmployee;}
 }
