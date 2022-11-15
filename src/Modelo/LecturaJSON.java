@@ -14,7 +14,6 @@ import java.util.Set;
 public class LecturaJSON {
     private String[][] employeeInfo;
     private JSONObject objetosDeJSON;
-    private String[] atributosGuardados;
     private int numEmployee;
 
 
@@ -25,10 +24,9 @@ public class LecturaJSON {
             Object objJSON = jsonParser.parse(readFile);
 
             JSONObject auxObjetosDeJSON = new JSONObject((Map) objJSON);
-            System.out.println("Json del archivo:");
             objetosDeJSON = (JSONObject) auxObjetosDeJSON.get("employees");
-            guardarAtributosEmployee();
-            System.out.println(objetosDeJSON);
+            leerAtributos();
+            //System.out.println(objetosDeJSON);
             numEmployee = numEmployeeCount();
             employeeInfo = new String[numEmployee][4];
             String[][] auxInfoEmployee = new String[numEmployee][4];
@@ -40,45 +38,32 @@ public class LecturaJSON {
             System.out.println("Error detectado: "+ e.getMessage());
         } catch (ParseException e){
             System.out.println("Estructura del JSON incorrecta");
+        }catch(MissingAttribute e){
+            System.out.println("El archivo JSON no cuenta con los atributos completos del empleado o están mal escritos");
         }
     }
 
-    private void guardarAtributosEmployee(){
+    private void leerAtributos() throws MissingAttribute {
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
         for(Object emp : listEmployee){
             JSONObject auxEmp = (JSONObject) emp;
             Set<String> atributos = auxEmp.keySet();
-            atributosGuardados = new String[atributos.size()];
-            try {
                 verificarAtributos(atributos);
-            } catch (MissingAttribute e) {
-                System.out.println("La estructura del employee en el archivo es incorrecta.");
-                System.exit(1);
-            }
         }
-
-
     }
 
     public void verificarAtributos(Set<String> atributosEmp) throws MissingAttribute {
-        String[] defaultAtributos ={"firstName","lastName","photo","id"};
-        int numAtributos = 0;
-        int i = 0;
-        for ( String key : atributosEmp) {
-            atributosGuardados[i] = (String) key;
-            numAtributos = 0;
-            for(String atrib : defaultAtributos) {
-                for (String llave : atributosGuardados) {
-                    if(atrib.equals(llave)){
-                        numAtributos++;
-                        break;
-                    }
+        String[] defaultAtributos ={"id","firstName","lastName","photo"};
+        int atributosVerificados = 0;
+        for ( String atributo : atributosEmp) {
+            for(String defAtrib : defaultAtributos) {
+                if(defAtrib.equals(atributo)){
+                    atributosVerificados++;
                 }
             }
-            i++;
         }
 
-        if(numAtributos!=4){
+        if(atributosVerificados!=4){
             throw new MissingAttribute();
         }
     }
