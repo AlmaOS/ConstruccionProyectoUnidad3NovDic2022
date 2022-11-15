@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 
 public class LecturaJSON {
     private String[][] employeeInfo;
@@ -23,9 +24,9 @@ public class LecturaJSON {
             Object objJSON = jsonParser.parse(readFile);
 
             JSONObject auxObjetosDeJSON = new JSONObject((Map) objJSON);
-            System.out.println("Json del archivo:");
             objetosDeJSON = (JSONObject) auxObjetosDeJSON.get("employees");
-            System.out.println(objetosDeJSON);
+            leerAtributos();
+            //System.out.println(objetosDeJSON);
             numEmployee = numEmployeeCount();
             employeeInfo = new String[numEmployee][4];
             String[][] auxInfoEmployee = new String[numEmployee][4];
@@ -37,6 +38,33 @@ public class LecturaJSON {
             System.out.println("Error detectado: "+ e.getMessage());
         } catch (ParseException e){
             System.out.println("Estructura del JSON incorrecta");
+        }catch(MissingAttribute e){
+            System.out.println("El archivo JSON no cuenta con los atributos completos del empleado o están mal escritos");
+        }
+    }
+
+    private void leerAtributos() throws MissingAttribute {
+        JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
+        for(Object emp : listEmployee){
+            JSONObject auxEmp = (JSONObject) emp;
+            Set<String> atributos = auxEmp.keySet();
+                verificarAtributos(atributos);
+        }
+    }
+
+    public void verificarAtributos(Set<String> atributosEmp) throws MissingAttribute {
+        String[] defaultAtributos ={"id","firstName","lastName","photo"};
+        int atributosVerificados = 0;
+        for ( String atributo : atributosEmp) {
+            for(String defAtrib : defaultAtributos) {
+                if(defAtrib.equals(atributo)){
+                    atributosVerificados++;
+                }
+            }
+        }
+
+        if(atributosVerificados!=4){
+            throw new MissingAttribute();
         }
     }
 
