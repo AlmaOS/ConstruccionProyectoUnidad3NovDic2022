@@ -40,17 +40,25 @@ public class Entrega1_Test {
 
     @Test
     @DisplayName("El archivo a leer debe estar dentro del directorio")
-    public void shouldThrowStopWhenFilenameWrong() {
+    public void shouldStopWhenFilenameWrong() {
         jsonReader.readFile("empleado.txt");
-        assertEquals(0,jsonReader.getNumEmployee());
-        assertNull(jsonReader.getEmployeeInfo());
+        assertFalse(jsonReader.getEmployeeInfo()==null);
+        assertEquals(3, jsonReader.getNumEmployee());
     }
 
     @Test
     @DisplayName("El archivo a leer debe tener la estructura adecuada")
     public void shouldStopWhenJsonStructureWrong() {
         jsonReader.readFile("employ.txt");
-        assertEquals(0,jsonReader.getNumEmployee());
-        assertNull(jsonReader.getEmployeeInfo());
+        assertFalse(jsonReader.getEmployeeInfo()==null);
+        assertEquals(3, jsonReader.getNumEmployee());
+    }
+
+    @Test
+    @DisplayName("El archivo a leer debe tener los atributos adecuados")
+    public void shouldStopWhenAttributesWrong() {
+        jsonReader.readFile("emp.txt");
+        assertFalse(jsonReader.getEmployeeInfo()==null);
+        assertEquals(3, jsonReader.getNumEmployee());
     }
 }
