@@ -30,9 +30,8 @@ public class LecturaJSON {
             leerAtributos();
             //System.out.println(objetosDeJSON);
             numEmployee = numEmployeeCount();
-            employeeInfo = new String[numEmployee][4];
-            String[][] auxInfoEmployee = new String[numEmployee][4];
-            employeeInfo = guardarInfoJSON(auxInfoEmployee);
+            listEmployees = new ArrayList<>();
+            guardarEmployees();
 
         } catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
@@ -83,18 +82,28 @@ public class LecturaJSON {
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
         for (Object a: listEmployee) {
             JSONObject auxEmployee = (JSONObject) a;
-            String id = (String) auxEmployee.get("id");
-            registroDatos[(Integer.parseInt(id))-1][0] = id;
-            registroDatos[(Integer.parseInt(id))-1][1] = (String) auxEmployee.get("firstName");
-            registroDatos[(Integer.parseInt(id))-1][2] = (String) auxEmployee.get("lastName");
-            registroDatos[(Integer.parseInt(id))-1][3] = (String) auxEmployee.get("photo");
-            crearEmployee(Integer.parseInt(registroDatos[(Integer.parseInt(id))-1][0]),registroDatos[(Integer.parseInt(id))-1][1],registroDatos[(Integer.parseInt(id))-1][2],registroDatos[(Integer.parseInt(id))-1][3]);
+            int id = Integer.parseInt((String) auxEmployee.get("id"));
+            registroDatos[id-1][0] = String.valueOf(id);
+            registroDatos[id-1][1] = (String) auxEmployee.get("firstName");
+            registroDatos[id-1][2] = (String) auxEmployee.get("lastName");
+            registroDatos[id-1][3] = (String) auxEmployee.get("photo");
+            //crearEmployee(id,registroDatos[id-1][1],registroDatos[id-1][2],registroDatos[id-1][3]);
         }
         return registroDatos;
     }
 
-    public void crearEmployee(int ID, String firstName, String lastName, String photoLink){
-        listEmployees.add(new Employee(ID, firstName, lastName, photoLink));
+    public void guardarEmployees(){
+        JSONArray listEmployee = (JSONArray) objetosDeJSON.get("employee");
+        for(Object a:listEmployee){
+            JSONObject employeeJSON = (JSONObject) a;
+            int ID = Integer.parseInt((String) employeeJSON.get("id"));
+            String firstName = (String) employeeJSON.get("firstName");
+            String lastName = (String) employeeJSON.get("lastName");
+            String photoLink = (String) employeeJSON.get("photo");
+
+            listEmployees.add(new Employee(ID, firstName, lastName, photoLink));
+        }
+
     }
 
     public ArrayList<Employee> getListEmployees() {

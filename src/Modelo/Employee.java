@@ -33,4 +33,8 @@ public class Employee {
     public String toString(){
         return "id: "+ID+ ", firstName: " +firstName+ ", lastName: "+lastName+ ", photo: "+photoLink;
     }
+
+    public String[] toTableFormat(){
+        return new String[]{String.valueOf(getID()),getFirstName(),getLastName(),getPhotoLink()};
+    }
 }

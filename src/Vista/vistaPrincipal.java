@@ -2,6 +2,7 @@ package Vista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class vistaPrincipal extends JFrame {
 
@@ -14,18 +15,10 @@ public class vistaPrincipal extends JFrame {
     public vistaPrincipal() {
         setContentPane(panelPrincipal);
         setTitle("Inicio");
-        setSize(450,300);
+        setSize(800,500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        crearTabla();
+        setMinimumSize(new Dimension(800,500));
     }
 
-    public void crearTabla(){
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-        model.addColumn("ID");
-        model.addColumn("Nombre");
-        model.addColumn("Apellido");
-        model.addColumn("Foto");
-        model.addRow(new String[]{"11111", "Alma", "Ordoñez", "www.foto.com"});
-    }
+    public JTable getTable(){ return table;}
 }
