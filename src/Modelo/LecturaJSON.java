@@ -28,8 +28,8 @@ public class LecturaJSON {
             JSONObject auxObjetosDeJSON = new JSONObject((Map) objJSON);
             objetosDeJSON = (JSONObject) auxObjetosDeJSON.get("employees");
             leerAtributos();
-            //System.out.println(objetosDeJSON);
             numEmployee = numEmployeeCount();
+            guardarInfoJSON(new String[numEmployee][4]);
             listEmployees = new ArrayList<>();
             guardarEmployees();
 
@@ -70,12 +70,8 @@ public class LecturaJSON {
     }
 
     private int numEmployeeCount(){
-        int numberEmployees = 0;
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
-        for (Object a: listEmployee) {
-            numberEmployees++;
-        }
-        return numberEmployees;
+        return listEmployee.size();
     }
 
     private String[][] guardarInfoJSON(String[][] registroDatos){
@@ -112,17 +108,13 @@ public class LecturaJSON {
 
     public void imprimir(){
         if(numEmployee!=0){
-            for(String[] a: employeeInfo){
-                for (String b: a){
-                    System.out.println(b);
-                }
+            for(Employee a: listEmployees){
+                System.out.println(a.toString());
             }
         }
     }
 
-    public String[][] getEmployeeInfo() {
-        return employeeInfo;
-    }
+    public String[][] getEmployeeInfo() {return employeeInfo;}
 
     public int getNumEmployee(){return numEmployee;}
 }
