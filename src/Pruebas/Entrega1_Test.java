@@ -2,14 +2,9 @@ package Pruebas;
 
 import Modelo.LecturaJSON;
 import Vista.vistaPrincipal;
-import com.sun.tools.jconsole.JConsoleContext;
-import com.sun.tools.jconsole.JConsolePlugin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileNotFoundException;
-import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
