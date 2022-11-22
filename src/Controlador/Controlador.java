@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Employee;
+import Modelo.EmployeeManager;
 import Modelo.LecturaJSON;
 import Vista.vistaPrincipal;
 
@@ -12,20 +13,17 @@ import javax.swing.table.TableColumn;
 import java.util.ArrayList;
 
 public class Controlador {
-    private LecturaJSON model;
+    private EmployeeManager model;
     private vistaPrincipal view;
-    private ArrayList<Employee> employees;
 
     public Controlador(){
-        model = new LecturaJSON();
+        model = new EmployeeManager();
         view = new vistaPrincipal();
-        model.readFile("employee.txt");
-        employees = model.getListEmployees();
-        llenarTabla();
+        llenarTabla(model.getListEmployees());
         view.setVisible(true);
     }
 
-    public void llenarTabla(){
+    public void llenarTabla(ArrayList<Employee> employees){
         DefaultTableModel model = (DefaultTableModel) view.getTable().getModel();
 
         model.addColumn("ID");
@@ -57,9 +55,5 @@ public class Controlador {
         column = view.getTable().getColumn("Foto");
         column.setMinWidth(150);
         column.setPreferredWidth(150);
-    }
-
-    public static void main(String[] args) {
-        Controlador controlador = new Controlador();
     }
 }
