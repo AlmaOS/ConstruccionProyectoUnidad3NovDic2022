@@ -34,7 +34,7 @@ public class EmployeeManager {
         }
     }
 
-    public ArrayList getListEmployees(){return listEmployees;}
+    public ArrayList<Employee> getListEmployees(){return listEmployees;}
 
     public void modificarEmployee(Employee emp){
         int id = emp.getID();
@@ -57,10 +57,10 @@ public class EmployeeManager {
         return null;
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         EmployeeManager emp = new EmployeeManager();
         emp.imprimirEmpleados();
         emp.modificarEmployee(new Employee(3,"Sabrina","Carpenter","https://"));
         emp.imprimirEmpleados();
-    }
+    }*/
 }

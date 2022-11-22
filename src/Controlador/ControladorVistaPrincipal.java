@@ -2,25 +2,37 @@ package Controlador;
 
 import Modelo.Employee;
 import Modelo.EmployeeManager;
-import Modelo.LecturaJSON;
+import Vista.vistaModificarEmployee;
 import Vista.vistaPrincipal;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Controlador {
+public class ControladorVistaPrincipal implements ActionListener {
     private EmployeeManager model;
     private vistaPrincipal view;
 
-    public Controlador(){
+    public ControladorVistaPrincipal(){
         model = new EmployeeManager();
         view = new vistaPrincipal();
         llenarTabla(model.getListEmployees());
         view.setVisible(true);
+
+        view.getbCambiar().addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(view.getbCambiar()==e.getSource()){
+            vistaModificarEmployee viewModify = new vistaModificarEmployee();
+            ControladorModificarEmployee controladorModificarEmployee = new ControladorModificarEmployee();
+            view.dispose();
+        }
     }
 
     public void llenarTabla(ArrayList<Employee> employees){
@@ -56,4 +68,5 @@ public class Controlador {
         column.setMinWidth(150);
         column.setPreferredWidth(150);
     }
+
 }

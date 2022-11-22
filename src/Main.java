@@ -1,12 +1,7 @@
-import Controlador.Controlador;
-import Modelo.Employee;
-import Modelo.LecturaJSON;
-import Vista.vistaPrincipal;
-
-import java.util.ArrayList;
+import Controlador.ControladorVistaPrincipal;
 
 public class Main {
     public static void main(String[] args) {
-        Controlador controller = new Controlador();
+        ControladorVistaPrincipal controller = new ControladorVistaPrincipal();
     }
 }
