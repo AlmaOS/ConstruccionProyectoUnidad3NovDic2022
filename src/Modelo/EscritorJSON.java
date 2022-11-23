@@ -38,5 +38,7 @@ public class EscritorJSON {
         employees.put("employees",employeeB);
     }
 
-
+    public JSONObject getEmployees() {
+        return employees;
+    }
 }

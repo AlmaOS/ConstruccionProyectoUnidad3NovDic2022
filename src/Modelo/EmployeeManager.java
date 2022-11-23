@@ -57,7 +57,11 @@ public class EmployeeManager {
         return null;
     }
 
-   /* public static void main(String[] args) {
+    public EscritorJSON getEditor() {
+        return editor;
+    }
+
+    /* public static void main(String[] args) {
         EmployeeManager emp = new EmployeeManager();
         emp.imprimirEmpleados();
         emp.modificarEmployee(new Employee(3,"Sabrina","Carpenter","https://"));
