@@ -3,7 +3,6 @@ package Controlador;
 import Modelo.Employee;
 import Modelo.EmployeeManager;
 import Vista.vistaModificarEmployee;
-import Vista.vistaPrincipal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,53 +18,45 @@ public class ControladorModificarEmployee implements ActionListener {
         view = new vistaModificarEmployee();
         listaEmployee = model.getListEmployees();
 
-        view.setVisible(true);
+        view.iniciarComboID(listaEmployee);
         view.getInicioButton().addActionListener(this);
         view.getModificarButton().addActionListener(this);
-        view.getTextFieldFN().setText("");
-        view.getTextFieldLN().setText("");
-        view.getTextFieldPhoto().setText("");
+        view.getComboID().addActionListener(this);
+        CambiarEmpleado();
+        view.setVisible(true);
+    }
+
+    private void CambiarEmpleado(){
+        int id=view.getComboID().getSelectedIndex();
+        view.getTextFieldFN().setText(listaEmployee.get(id).getFirstName());
+        view.getTextFieldLN().setText(listaEmployee.get(id).getLastName());
+        view.getTextFieldPhoto().setText(listaEmployee.get(id).getPhotoLink());
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(view.getComboID()==e.getSource()){
+            CambiarEmpleado();
+        }
+
         if(view.getModificarButton() == e.getSource()){
-            int id = Integer.parseInt(view.getTextFieldID().getText());
-            int textEmpty = 0;
-            String firstN = listaEmployee.get(id-1).getFirstName();
-            String lastN = listaEmployee.get(id-1).getLastName();
-            String photo = listaEmployee.get(id-1).getPhotoLink();
+            String firstN=view.getTextFieldFN().getText();
+            String lastN=view.getTextFieldLN().getText();
+            String photo = view.getTextFieldPhoto().getText();
 
-            if(!view.getTextFieldFN().getText().equals("")){
-                firstN = view.getTextFieldFN().getText();
-            }else {
-                textEmpty++;
-            }
-            if(!view.getTextFieldLN().getText().equals("")){
-                lastN = view.getTextFieldLN().getText();
-            }else {
-                textEmpty++;
-            }
-            if(!view.getTextFieldPhoto().getText().equals("")){
-                photo = view.getTextFieldPhoto().getText();
-            }else {
-                textEmpty++;
-            }
-
-            if(textEmpty==3){
-                System.out.println("El empleado no se ha modificado");
-            }else {
-                model.modificarEmployee(new Employee(id, firstN, lastN, photo));
-                System.out.println("Empleado modificado");
-            }
+            model.modificarEmployee(new Employee(view.getComboID().getSelectedIndex()+1, firstN, lastN, photo));
+            System.out.println("Empleado modificado");
         }
 
         if(view.getInicioButton()==e.getSource()){
-            vistaPrincipal viewPrincipal = new vistaPrincipal();
             ControladorVistaPrincipal controladorPrincipal = new ControladorVistaPrincipal();
             view.dispose();
         }
+    }
+
+    public static void main(String[] args) {
+        ControladorModificarEmployee controller = new ControladorModificarEmployee();
     }
 
 }

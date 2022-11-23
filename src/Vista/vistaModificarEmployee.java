@@ -1,16 +1,19 @@
 package Vista;
 
+import Modelo.Employee;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class vistaModificarEmployee extends JFrame{
-    private JTextField textFieldID;
     private JTextField textFieldFN;
     private JTextField textFieldLN;
     private JTextField textFieldPhoto;
     private JPanel panelModificar;
     private JButton modificarButton;
     private JButton inicioButton;
+    private JComboBox comboID;
 
     public vistaModificarEmployee() {
         setContentPane(panelModificar);
@@ -20,13 +23,13 @@ public class vistaModificarEmployee extends JFrame{
         setMinimumSize(new Dimension(600,300));
     }
 
-    public JTextField getTextFieldID() {
-        return textFieldID;
+    public void iniciarComboID(ArrayList<Employee> empleados){
+        for(int i=0;i<empleados.size();i++){
+            comboID.addItem(empleados.get(i).getID());
+        }
     }
 
-    public void setTextFieldID(JTextField textFieldID) {
-        this.textFieldID = textFieldID;
-    }
+    public JComboBox getComboID(){return comboID;}
 
     public JTextField getTextFieldFN() {
         return textFieldFN;
