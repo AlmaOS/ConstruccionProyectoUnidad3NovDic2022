@@ -37,4 +37,10 @@ public class Employee {
     public String[] toTableFormat(){
         return new String[]{String.valueOf(getID()),getFirstName(),getLastName(),getPhotoLink()};
     }
+
+    public void setFirstName(String firstName) {this.firstName = firstName;}
+
+    public void setLastName(String lastName) {this.lastName = lastName;}
+
+    public void setPhotoLink(String photoLink) {this.photoLink = photoLink;}
 }

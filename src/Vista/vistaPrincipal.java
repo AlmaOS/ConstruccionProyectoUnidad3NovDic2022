@@ -21,4 +21,8 @@ public class vistaPrincipal extends JFrame {
     }
 
     public JTable getTable(){ return table;}
+
+    public JButton getbCambiar() {
+        return bCambiar;
+    }
 }

@@ -85,7 +85,7 @@
             </constraints>
             <properties>
               <font name="Century Gothic"/>
-              <text value="Cambiar"/>
+              <text value="Modificar"/>
             </properties>
           </component>
         </children>
