@@ -16,7 +16,6 @@ public class LecturaJSON {
     private String[][] employeeInfo;
     private JSONObject objetosDeJSON;
     private int numEmployee;
-    private ArrayList<Employee> listEmployees = new ArrayList<>();
 
 
     public  void readFile(String archivo){
@@ -29,9 +28,7 @@ public class LecturaJSON {
             objetosDeJSON = (JSONObject) auxObjetosDeJSON.get("employees");
             leerAtributos();
             numEmployee = numEmployeeCount();
-            guardarInfoJSON(new String[numEmployee][4]);
-            listEmployees = new ArrayList<>();
-            guardarEmployees();
+            employeeInfo=guardarInfoJSON(new String[numEmployee][4]);
 
         } catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
@@ -83,35 +80,8 @@ public class LecturaJSON {
             registroDatos[id-1][1] = (String) auxEmployee.get("firstName");
             registroDatos[id-1][2] = (String) auxEmployee.get("lastName");
             registroDatos[id-1][3] = (String) auxEmployee.get("photo");
-            //crearEmployee(id,registroDatos[id-1][1],registroDatos[id-1][2],registroDatos[id-1][3]);
         }
         return registroDatos;
-    }
-
-    public void guardarEmployees(){
-        JSONArray listEmployee = (JSONArray) objetosDeJSON.get("employee");
-        for(Object a:listEmployee){
-            JSONObject employeeJSON = (JSONObject) a;
-            int ID = Integer.parseInt((String) employeeJSON.get("id"));
-            String firstName = (String) employeeJSON.get("firstName");
-            String lastName = (String) employeeJSON.get("lastName");
-            String photoLink = (String) employeeJSON.get("photo");
-
-            listEmployees.add(new Employee(ID, firstName, lastName, photoLink));
-        }
-
-    }
-
-    public ArrayList<Employee> getListEmployees() {
-        return listEmployees;
-    }
-
-    public void imprimir(){
-        if(numEmployee!=0){
-            for(Employee a: listEmployees){
-                System.out.println(a.toString());
-            }
-        }
     }
 
     public String[][] getEmployeeInfo() {return employeeInfo;}

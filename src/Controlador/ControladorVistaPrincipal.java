@@ -1,31 +1,41 @@
 package Controlador;
 
 import Modelo.Employee;
-import Modelo.LecturaJSON;
+import Modelo.EmployeeManager;
+import Vista.vistaModificarEmployee;
 import Vista.vistaPrincipal;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Controlador {
-    private LecturaJSON model;
+public class ControladorVistaPrincipal implements ActionListener {
+    private EmployeeManager model;
     private vistaPrincipal view;
-    private ArrayList<Employee> employees;
 
-    public Controlador(){
-        model = new LecturaJSON();
+    public ControladorVistaPrincipal(){
+        model = new EmployeeManager();
         view = new vistaPrincipal();
-        model.readFile("employee.txt");
-        employees = model.getListEmployees();
-        llenarTabla();
+        llenarTabla(model.getListEmployees());
         view.setVisible(true);
+
+        view.getbCambiar().addActionListener(this);
     }
 
-    public void llenarTabla(){
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(view.getbCambiar()==e.getSource()){
+            vistaModificarEmployee viewModify = new vistaModificarEmployee();
+            ControladorModificarEmployee controladorModificarEmployee = new ControladorModificarEmployee();
+            view.dispose();
+        }
+    }
+
+    public void llenarTabla(ArrayList<Employee> employees){
         DefaultTableModel model = (DefaultTableModel) view.getTable().getModel();
 
         model.addColumn("ID");
@@ -59,7 +69,4 @@ public class Controlador {
         column.setPreferredWidth(150);
     }
 
-    public static void main(String[] args) {
-        Controlador controlador = new Controlador();
-    }
 }
