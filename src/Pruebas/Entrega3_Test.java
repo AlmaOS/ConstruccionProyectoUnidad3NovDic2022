@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Entrega3_Test {
     private static EmployeeManager employeeManager;
@@ -23,7 +22,7 @@ public class Entrega3_Test {
     @Test
     @DisplayName("Probando modificar employee")
     public void shouldModifyEmployee(){
-        assertFalse(employeeManager.getListEmployees()==null);
+        assertTrue(employeeManager.getListEmployees().get(2).getFirstName().equals("Conan"));
         assertEquals(3,employeeManager.getListEmployees().size());
     }
 
