@@ -13,5 +13,5 @@ Proyecto de construcción de software Unidad 3
 - **Entrega 1:** 14 de noviembre.
 - **Entrega 2:** 17 de noviembre.
 - **Entrega 3:** 22 de noviembre.
-- **Entrega 4:** 28 de noviembre.
+- **Entrega 4:** 1 de diciembre.
 - **Entrega 5:** 5 de diciembre.  
