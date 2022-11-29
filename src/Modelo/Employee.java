@@ -1,5 +1,10 @@
 package Modelo;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
+
 public class Employee {
     private int ID;
     private String firstName;
@@ -34,8 +39,30 @@ public class Employee {
         return "id: "+ID+ ", firstName: " +firstName+ ", lastName: "+lastName+ ", photo: "+photoLink;
     }
 
-    public String[] toTableFormat(){
-        return new String[]{String.valueOf(getID()),getFirstName(),getLastName(),getPhotoLink()};
+    public Object[] toTableFormat(){
+        JLabel JImg = new JLabel();
+        try {
+            JImg.setIcon(createImage(this.photoLink));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new Object[] {ID, firstName, lastName, JImg};
+    }
+
+    public ImageIcon createImage(String urlLocation) {
+        Image image = null;
+
+        try {
+            URL urlImg = new URL(urlLocation);
+            image = ImageIO.read(urlImg);
+            Image icon = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            return new ImageIcon(icon);
+        } catch (Exception e) {
+            ImageIcon img = new ImageIcon("user.png");
+            Image icon = img.getImage().getScaledInstance(150,150,Image.SCALE_SMOOTH);
+            return new ImageIcon(icon);
+        }
     }
 
     public void setFirstName(String firstName) {this.firstName = firstName;}
