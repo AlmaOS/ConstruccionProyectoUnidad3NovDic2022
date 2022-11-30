@@ -27,9 +27,7 @@ public class LecturaJSON {
             objetosDeJSON = (JSONObject) auxObjetosDeJSON.get("employees");
             System.out.println(objetosDeJSON);
             numEmployee = numEmployeeCount();
-            employeeInfo = new String[numEmployee][4];
-            String[][] auxInfoEmployee = new String[numEmployee][4];
-            employeeInfo = guardarInfoJSON(auxInfoEmployee);
+            employeeInfo=guardarInfoJSON(new String[numEmployee][4]);
 
         } catch (FileNotFoundException e){
             System.out.println("Archivo no encontrado");
@@ -53,28 +51,16 @@ public class LecturaJSON {
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
         for (Object a: listEmployee) {
             JSONObject auxEmployee = (JSONObject) a;
-            String id = (String) auxEmployee.get("id");
-            registroDatos[(Integer.parseInt(id))-1][0] = id;
-            registroDatos[(Integer.parseInt(id))-1][1] = (String) auxEmployee.get("firstName");
-            registroDatos[(Integer.parseInt(id))-1][2] = (String) auxEmployee.get("lastName");
-            registroDatos[(Integer.parseInt(id))-1][3] = (String) auxEmployee.get("photo");
+            int id = Integer.parseInt((String) auxEmployee.get("id"));
+            registroDatos[id-1][0] = String.valueOf(id);
+            registroDatos[id-1][1] = (String) auxEmployee.get("firstName");
+            registroDatos[id-1][2] = (String) auxEmployee.get("lastName");
+            registroDatos[id-1][3] = (String) auxEmployee.get("photo");
         }
         return registroDatos;
     }
 
-    public void imprimir(){
-        if(numEmployee!=0){
-            for(String[] a: employeeInfo){
-                for (String b: a){
-                    System.out.println(b);
-                }
-            }
-        }
-    }
-
-    public String[][] getEmployeeInfo() {
-        return employeeInfo;
-    }
+    public String[][] getEmployeeInfo() {return employeeInfo;}
 
     public int getNumEmployee(){return numEmployee;}
 }

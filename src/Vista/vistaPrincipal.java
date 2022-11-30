@@ -19,13 +19,9 @@ public class vistaPrincipal extends JFrame {
         crearTabla();
     }
 
-    public void crearTabla(){
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
+    public JTable getTable(){ return table;}
 
-        model.addColumn("ID");
-        model.addColumn("Nombre");
-        model.addColumn("Apellido");
-        model.addColumn("Foto");
-        model.addRow(new String[]{"11111", "Alma", "Ordoñez", "www.foto.com"});
+    public JButton getbCambiar() {
+        return bCambiar;
     }
 }
