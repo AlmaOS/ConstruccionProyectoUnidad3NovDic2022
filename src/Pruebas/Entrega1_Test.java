@@ -2,9 +2,14 @@ package Pruebas;
 
 import Modelo.LecturaJSON;
 import Vista.vistaPrincipal;
+import com.sun.tools.jconsole.JConsoleContext;
+import com.sun.tools.jconsole.JConsolePlugin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,25 +40,17 @@ public class Entrega1_Test {
 
     @Test
     @DisplayName("El archivo a leer debe estar dentro del directorio")
-    public void shouldStopWhenFilenameWrong() {
+    public void shouldThrowStopWhenFilenameWrong() {
         jsonReader.readFile("empleado.txt");
-        assertFalse(jsonReader.getEmployeeInfo()==null);
-        assertEquals(3, jsonReader.getNumEmployee());
+        assertEquals(0,jsonReader.getNumEmployee());
+        assertNull(jsonReader.getEmployeeInfo());
     }
 
     @Test
     @DisplayName("El archivo a leer debe tener la estructura adecuada")
     public void shouldStopWhenJsonStructureWrong() {
         jsonReader.readFile("employ.txt");
-        assertFalse(jsonReader.getEmployeeInfo()==null);
-        assertEquals(3, jsonReader.getNumEmployee());
-    }
-
-    @Test
-    @DisplayName("El archivo a leer debe tener los atributos adecuados")
-    public void shouldStopWhenAttributesWrong() {
-        jsonReader.readFile("emp.txt");
-        assertFalse(jsonReader.getEmployeeInfo()==null);
-        assertEquals(3, jsonReader.getNumEmployee());
+        assertEquals(0,jsonReader.getNumEmployee());
+        assertNull(jsonReader.getEmployeeInfo());
     }
 }
