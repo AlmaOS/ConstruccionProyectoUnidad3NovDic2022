@@ -48,6 +48,11 @@ public class EmployeeManager {
         }
     }
 
+    public void eliminarEmployee(int id){
+        listEmployees.remove(id-1);
+        editor.actualizarJSON(listEmployees);
+    }
+
     private Employee buscar(int id){
         for(Employee e:listEmployees){
             if(e.getID()==id){
@@ -61,10 +66,10 @@ public class EmployeeManager {
         return editor;
     }
 
-    /* public static void main(String[] args) {
+    /*public static void main(String[] args) {
         EmployeeManager emp = new EmployeeManager();
         emp.imprimirEmpleados();
-        emp.modificarEmployee(new Employee(3,"Sabrina","Carpenter","https://"));
+        emp.eliminarEmployee(4);
         emp.imprimirEmpleados();
     }*/
 }
