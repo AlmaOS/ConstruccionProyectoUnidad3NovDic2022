@@ -2,6 +2,8 @@ package Controlador;
 
 import Modelo.Employee;
 import Modelo.EmployeeManager;
+import Vista.TableImage;
+import Vista.vistaEliminarEmployee;
 import Vista.vistaModificarEmployee;
 import Vista.vistaPrincipal;
 
@@ -24,6 +26,7 @@ public class ControladorVistaPrincipal implements ActionListener {
         view.setVisible(true);
 
         view.getbCambiar().addActionListener(this);
+        view.getbEliminar().addActionListener(this);
     }
 
     @Override
@@ -31,6 +34,11 @@ public class ControladorVistaPrincipal implements ActionListener {
         if(view.getbCambiar()==e.getSource()){
             vistaModificarEmployee viewModify = new vistaModificarEmployee();
             ControladorModificarEmployee controladorModificarEmployee = new ControladorModificarEmployee();
+            view.dispose();
+        }
+        if(view.getbEliminar()==e.getSource()){
+            vistaEliminarEmployee viewEliminar = new vistaEliminarEmployee();
+            ControladorEliminarEmployee controladorEliminarEmployee = new ControladorEliminarEmployee();
             view.dispose();
         }
     }
@@ -50,6 +58,8 @@ public class ControladorVistaPrincipal implements ActionListener {
 
     private void setDesignTable(){
         TableColumn column = view.getTable().getColumn("ID");
+        view.getTable().setDefaultRenderer(Object.class,new TableImage());
+        view.getTable().setRowHeight(160);
         column.setMinWidth(20);
         column.setPreferredWidth(20);
         column.setMaxWidth(20);
@@ -66,7 +76,7 @@ public class ControladorVistaPrincipal implements ActionListener {
         column.setMaxWidth(150);
         column = view.getTable().getColumn("Foto");
         column.setMinWidth(150);
-        column.setPreferredWidth(150);
+        column.setPreferredWidth(50);
     }
 
 }
