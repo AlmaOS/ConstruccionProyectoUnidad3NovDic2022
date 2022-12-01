@@ -17,6 +17,7 @@ public class ControladorEliminarEmployee implements ActionListener {
     private EmployeeManager model;
     private vistaEliminarEmployee view;
     private ArrayList<Employee> listaEmployee;
+    private int empMostrados =0;
 
     public ControladorEliminarEmployee() {
         model = new EmployeeManager();
@@ -67,9 +68,20 @@ public class ControladorEliminarEmployee implements ActionListener {
         column.setMinWidth(150);
         column.setPreferredWidth(50);
     }
+
+    public void limpiarTabla(){
+        DefaultTableModel model = (DefaultTableModel) view.getTable1().getModel();
+        for(int i=0; i<view.getTable1().getRowCount();i++){
+            model.removeRow(i);
+        }
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(view.getComboID()==e.getSource()){
+            empMostrados++;
+            if (empMostrados >=1){
+                limpiarTabla();
+            }
             mostrarEmpleado(listaEmployee);
         }
 
