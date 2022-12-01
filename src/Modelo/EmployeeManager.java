@@ -48,6 +48,18 @@ public class EmployeeManager {
         }
     }
 
+    public void eliminarEmployee(int id){
+        listEmployees.remove(id-1);
+        actualizarID();
+        editor.actualizarJSON(listEmployees);
+    }
+
+    public void actualizarID(){
+        for(int i=0;i<listEmployees.size();i++){
+            listEmployees.get(i).setID(i+1);
+        }
+    }
+
     private Employee buscar(int id){
         for(Employee e:listEmployees){
             if(e.getID()==id){
@@ -61,10 +73,10 @@ public class EmployeeManager {
         return editor;
     }
 
-    /* public static void main(String[] args) {
+    public static void main(String[] args) {
         EmployeeManager emp = new EmployeeManager();
         emp.imprimirEmpleados();
-        emp.modificarEmployee(new Employee(3,"Sabrina","Carpenter","https://"));
+        emp.eliminarEmployee(3);
         emp.imprimirEmpleados();
-    }*/
+    }
 }

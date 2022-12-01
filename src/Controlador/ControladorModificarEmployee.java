@@ -36,27 +36,22 @@ public class ControladorModificarEmployee implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(view.getComboID()==e.getSource()){
+        if (view.getComboID() == e.getSource()) {
             CambiarEmpleado();
         }
 
-        if(view.getModificarButton() == e.getSource()){
-            String firstN=view.getTextFieldFN().getText();
-            String lastN=view.getTextFieldLN().getText();
+        if (view.getModificarButton() == e.getSource()) {
+            String firstN = view.getTextFieldFN().getText();
+            String lastN = view.getTextFieldLN().getText();
             String photo = view.getTextFieldPhoto().getText();
 
-            model.modificarEmployee(new Employee(view.getComboID().getSelectedIndex()+1, firstN, lastN, photo));
+            model.modificarEmployee(new Employee(view.getComboID().getSelectedIndex() + 1, firstN, lastN, photo));
             System.out.println("Empleado modificado");
         }
 
-        if(view.getInicioButton()==e.getSource()){
+        if (view.getInicioButton() == e.getSource()) {
             ControladorVistaPrincipal controladorPrincipal = new ControladorVistaPrincipal();
             view.dispose();
         }
     }
-
-    public static void main(String[] args) {
-        ControladorModificarEmployee controller = new ControladorModificarEmployee();
-    }
-
 }
