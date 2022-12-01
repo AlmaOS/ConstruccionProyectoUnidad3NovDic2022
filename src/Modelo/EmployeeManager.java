@@ -50,7 +50,15 @@ public class EmployeeManager {
 
     public void eliminarEmployee(int id){
         listEmployees.remove(id-1);
+        actualizarID();
         editor.actualizarJSON(listEmployees);
+    }
+
+    public void actualizarID(){
+        for(int i=0;i<listEmployees.size();i++){
+            Employee e=listEmployees.get(i);
+            e.setID(i+1);
+        }
     }
 
     private Employee buscar(int id){
@@ -69,7 +77,7 @@ public class EmployeeManager {
     /*public static void main(String[] args) {
         EmployeeManager emp = new EmployeeManager();
         emp.imprimirEmpleados();
-        emp.eliminarEmployee(4);
+        emp.eliminarEmployee(3);
         emp.imprimirEmpleados();
     }*/
 }
