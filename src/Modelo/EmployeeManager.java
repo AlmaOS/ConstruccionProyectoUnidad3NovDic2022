@@ -74,10 +74,10 @@ public class EmployeeManager {
         return editor;
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         EmployeeManager emp = new EmployeeManager();
         emp.imprimirEmpleados();
         emp.eliminarEmployee(3);
         emp.imprimirEmpleados();
-    }*/
+    }
 }

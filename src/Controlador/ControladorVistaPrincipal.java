@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.Employee;
 import Modelo.EmployeeManager;
 import Vista.TableImage;
+import Vista.vistaEliminarEmployee;
 import Vista.vistaModificarEmployee;
 import Vista.vistaPrincipal;
 
@@ -25,6 +26,7 @@ public class ControladorVistaPrincipal implements ActionListener {
         view.setVisible(true);
 
         view.getbCambiar().addActionListener(this);
+        view.getbEliminar().addActionListener(this);
     }
 
     @Override
@@ -32,6 +34,11 @@ public class ControladorVistaPrincipal implements ActionListener {
         if(view.getbCambiar()==e.getSource()){
             vistaModificarEmployee viewModify = new vistaModificarEmployee();
             ControladorModificarEmployee controladorModificarEmployee = new ControladorModificarEmployee();
+            view.dispose();
+        }
+        if(view.getbEliminar()==e.getSource()){
+            vistaEliminarEmployee viewEliminar = new vistaEliminarEmployee();
+            ControladorEliminarEmployee controladorEliminarEmployee = new ControladorEliminarEmployee();
             view.dispose();
         }
     }

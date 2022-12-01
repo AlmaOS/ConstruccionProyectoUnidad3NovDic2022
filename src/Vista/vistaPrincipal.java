@@ -1,7 +1,6 @@
 package Vista;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class vistaPrincipal extends JFrame {
@@ -24,5 +23,13 @@ public class vistaPrincipal extends JFrame {
 
     public JButton getbCambiar() {
         return bCambiar;
+    }
+
+    public JButton getbAgregar() {
+        return bAgregar;
+    }
+
+    public JButton getbEliminar() {
+        return bEliminar;
     }
 }
