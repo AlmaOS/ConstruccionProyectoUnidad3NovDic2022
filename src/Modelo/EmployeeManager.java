@@ -56,8 +56,7 @@ public class EmployeeManager {
 
     public void actualizarID(){
         for(int i=0;i<listEmployees.size();i++){
-            Employee e=listEmployees.get(i);
-            e.setID(i+1);
+            listEmployees.get(i).setID(i+1);
         }
     }
 

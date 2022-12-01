@@ -40,10 +40,10 @@ public class ControladorEliminarEmployee implements ActionListener {
         model.addColumn("Foto");
         setDesignTable();
     }
-    public void mostrarEmpleado(ArrayList<Employee> employees){
+    public void mostrarEmpleado(){
         DefaultTableModel model = (DefaultTableModel) view.getTable1().getModel();
         int id=view.getComboID().getSelectedIndex();
-        model.addRow(employees.get(id).toTableFormat());
+        model.addRow(listaEmployee.get(id).toTableFormat());
     }
 
     private void setDesignTable(){
@@ -75,19 +75,23 @@ public class ControladorEliminarEmployee implements ActionListener {
             model.removeRow(i);
         }
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(view.getComboID()==e.getSource()){
             empMostrados++;
             if (empMostrados >=1){
                 limpiarTabla();
             }
-            mostrarEmpleado(listaEmployee);
+            mostrarEmpleado();
         }
 
         if (view.getEliminarButton()==e.getSource()){
             model.eliminarEmployee(view.getComboID().getSelectedIndex()+1);
             System.out.println("Empleado eliminado");
+            ControladorVistaPrincipal controladorVistaPrincipal = new ControladorVistaPrincipal();
+            view.dispose();
         }
 
         if (view.getInicioButton()==e.getSource()){
