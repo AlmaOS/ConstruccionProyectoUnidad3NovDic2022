@@ -14,9 +14,8 @@ public class vistaPrincipal extends JFrame {
     public vistaPrincipal() {
         setContentPane(panelPrincipal);
         setTitle("Inicio");
-        setSize(800,500);
+        setSize(800,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(800,500));
     }
 
     public JTable getTable(){ return table;}

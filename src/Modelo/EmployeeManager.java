@@ -38,10 +38,10 @@ public class EmployeeManager {
 
     public void modificarEmployee(Employee emp){
         int id = emp.getID();
-        Employee oldEmp=buscar(id);
-        if(oldEmp!=null) {
-            listEmployees.remove(id - 1);
-            listEmployees.add(id - 1, emp);
+        int index=buscar(id);
+        if(index>=0) {
+            listEmployees.remove(index);
+            listEmployees.add(index, emp);
             editor.actualizarJSON(listEmployees);
         }else{
             System.out.println("ID no encontrado");
@@ -49,24 +49,19 @@ public class EmployeeManager {
     }
 
     public void eliminarEmployee(int id){
-        listEmployees.remove(id-1);
-        actualizarID();
+        int index = buscar(id);
+        listEmployees.remove(index);
         editor.actualizarJSON(listEmployees);
     }
 
-    public void actualizarID(){
+    private int buscar(int id){
         for(int i=0;i<listEmployees.size();i++){
-            listEmployees.get(i).setID(i+1);
-        }
-    }
-
-    private Employee buscar(int id){
-        for(Employee e:listEmployees){
+            Employee e = listEmployees.get(i);
             if(e.getID()==id){
-                return e;
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
     public EscritorJSON getEditor() {
