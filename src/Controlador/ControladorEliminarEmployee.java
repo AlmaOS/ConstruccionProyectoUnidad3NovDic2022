@@ -88,7 +88,7 @@ public class ControladorEliminarEmployee implements ActionListener {
         }
 
         if (view.getEliminarButton()==e.getSource()){
-            model.eliminarEmployee(view.getComboID().getSelectedIndex()+1);
+            model.eliminarEmployee((Integer) view.getComboID().getSelectedItem());
             System.out.println("Empleado eliminado");
             ControladorVistaPrincipal controladorVistaPrincipal = new ControladorVistaPrincipal();
             view.dispose();

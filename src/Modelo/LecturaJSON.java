@@ -49,13 +49,14 @@ public class LecturaJSON {
 
     private String[][] guardarInfoJSON(String[][] registroDatos){
         JSONArray listEmployee =(JSONArray) objetosDeJSON.get("employee");
-        for (Object a: listEmployee) {
+        for (int i=0;i<listEmployee.size();i++) {
+            Object a= listEmployee.get(i);
             JSONObject auxEmployee = (JSONObject) a;
             int id = Integer.parseInt((String) auxEmployee.get("id"));
-            registroDatos[id-1][0] = String.valueOf(id);
-            registroDatos[id-1][1] = (String) auxEmployee.get("firstName");
-            registroDatos[id-1][2] = (String) auxEmployee.get("lastName");
-            registroDatos[id-1][3] = (String) auxEmployee.get("photo");
+            registroDatos[i][0] = String.valueOf(id);
+            registroDatos[i][1] = (String) auxEmployee.get("firstName");
+            registroDatos[i][2] = (String) auxEmployee.get("lastName");
+            registroDatos[i][3] = (String) auxEmployee.get("photo");
         }
         return registroDatos;
     }
