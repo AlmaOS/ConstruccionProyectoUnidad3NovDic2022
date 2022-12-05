@@ -86,9 +86,4 @@ public class EmployeeManager {
     public EscritorJSON getEditor() {
         return editor;
     }
-
-    public static void main(String[] args) {
-        EmployeeManager emp = new EmployeeManager();
-        emp.agregarEmpleado(3,"Conan","Gray","https://conan.png");
-    }
 }
