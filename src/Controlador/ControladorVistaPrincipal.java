@@ -2,10 +2,7 @@ package Controlador;
 
 import Modelo.Employee;
 import Modelo.EmployeeManager;
-import Vista.TableImage;
-import Vista.vistaEliminarEmployee;
-import Vista.vistaModificarEmployee;
-import Vista.vistaPrincipal;
+import Vista.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -27,6 +24,7 @@ public class ControladorVistaPrincipal implements ActionListener {
 
         view.getbCambiar().addActionListener(this);
         view.getbEliminar().addActionListener(this);
+        view.getbAgregar().addActionListener(this);
     }
 
     @Override
@@ -40,6 +38,12 @@ public class ControladorVistaPrincipal implements ActionListener {
             vistaEliminarEmployee viewEliminar = new vistaEliminarEmployee();
             ControladorEliminarEmployee controladorEliminarEmployee = new ControladorEliminarEmployee();
             view.dispose();
+        }
+        if(view.getbAgregar()==e.getSource()){
+            System.out.println("A");
+            ControladorAgregarEmployee addController = new ControladorAgregarEmployee();
+            view.dispose();
+
         }
     }
 

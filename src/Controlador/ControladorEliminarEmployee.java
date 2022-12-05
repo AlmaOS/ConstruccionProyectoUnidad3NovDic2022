@@ -99,8 +99,4 @@ public class ControladorEliminarEmployee implements ActionListener {
             view.dispose();
         }
     }
-
-    public static void main(String[] args) {
-        ControladorEliminarEmployee controladorEliminarEmployee = new ControladorEliminarEmployee();
-    }
 }
