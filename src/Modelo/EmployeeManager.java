@@ -62,7 +62,7 @@ public class EmployeeManager {
         }
     }
 
-    private boolean existeID(int ID){
+    public boolean existeID(int ID){
         boolean exist = false;
         for(int i=0;i<listEmployees.size();i++){
            if(listEmployees.get(i).getID() == ID){
