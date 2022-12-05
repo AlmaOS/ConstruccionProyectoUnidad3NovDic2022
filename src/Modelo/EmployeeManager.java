@@ -54,6 +54,25 @@ public class EmployeeManager {
         editor.actualizarJSON(listEmployees);
     }
 
+    public void agregarEmpleado(int id, String fName, String LName, String link){
+        Employee emp = new Employee(id,fName,LName,link);
+        if(!existeID(id)){
+            listEmployees.add(emp);
+            editor.actualizarJSON(listEmployees);
+        }
+    }
+
+    private boolean existeID(int ID){
+        boolean exist = false;
+        for(int i=0;i<listEmployees.size();i++){
+           if(listEmployees.get(i).getID() == ID){
+               exist = true;
+               break;
+           }
+        }
+        return exist;
+    }
+
     private int buscar(int id){
         for(int i=0;i<listEmployees.size();i++){
             Employee e = listEmployees.get(i);
@@ -70,8 +89,6 @@ public class EmployeeManager {
 
     public static void main(String[] args) {
         EmployeeManager emp = new EmployeeManager();
-        emp.imprimirEmpleados();
-        emp.eliminarEmployee(3);
-        emp.imprimirEmpleados();
+        emp.agregarEmpleado(3,"Conan","Gray","https://conan.png");
     }
 }
