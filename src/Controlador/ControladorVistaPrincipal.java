@@ -40,7 +40,6 @@ public class ControladorVistaPrincipal implements ActionListener {
             view.dispose();
         }
         if(view.getbAgregar()==e.getSource()){
-            System.out.println("A");
             ControladorAgregarEmployee addController = new ControladorAgregarEmployee();
             view.dispose();
 

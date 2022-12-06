@@ -45,8 +45,10 @@ public class ControladorModificarEmployee implements ActionListener {
             String lastN = view.getTextFieldLN().getText();
             String photo = view.getTextFieldPhoto().getText();
 
-            model.modificarEmployee(new Employee(view.getComboID().getSelectedIndex() + 1, firstN, lastN, photo));
+            model.modificarEmployee(new Employee((Integer) view.getComboID().getSelectedItem(), firstN, lastN, photo));
             System.out.println("Empleado modificado");
+            ControladorVistaPrincipal controladorVistaPrincipal = new ControladorVistaPrincipal();
+            view.dispose();
         }
 
         if (view.getInicioButton() == e.getSource()) {
