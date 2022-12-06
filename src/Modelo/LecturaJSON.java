@@ -23,9 +23,7 @@ public class LecturaJSON {
             Object objJSON = jsonParser.parse(readFile);
 
             JSONObject auxObjetosDeJSON = new JSONObject((Map) objJSON);
-            System.out.println("Json del archivo:");
             objetosDeJSON = (JSONObject) auxObjetosDeJSON.get("employees");
-            System.out.println(objetosDeJSON);
             numEmployee = numEmployeeCount();
             employeeInfo=guardarInfoJSON(new String[numEmployee][4]);
 
